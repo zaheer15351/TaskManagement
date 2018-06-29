@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="root">
+            <reference name="top.links">
+
+                <action method="addLink" translate="label title" module="taskmanagement">
+                    <label>Tasks Management</label>
+                    <url helper="taskmanagement/getTasksManagementUrl"/>
+                    <title>Tasks Management</title>
+                    <prepare/>
+                    <urlParams/>
+                    <position>10</position>
+                </action>
+            </reference>
+        </reference>
+    </default>
+    <taskmanagement_index_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/taskmanagement.js</name>
+            </action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="taskmanagement/list" name="taskmanagement_list" template="taskmanagement/list.phtml"/>
+        </reference>
+    </taskmanagement_index_index>
+
+    <taskmanagement_actions_add>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>datetimepicker/jquery.datetimepicker.full.min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>datetimepicker/jquery.datetimepicker.css</name>
+            </action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2columns-right.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="taskmanagement/form" name="taskmanagement_form_add" template="taskmanagement/form.phtml">
+                <action method="setTitle" translate="title">
+                    <title>Add Task</title>
+                </action>
+            </block>
+        </reference>
+    </taskmanagement_actions_add>
+
+    <taskmanagement_actions_edit>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>datetimepicker/jquery.datetimepicker.full.min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>datetimepicker/jquery.datetimepicker.css</name>
+            </action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2columns-right.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="taskmanagement/form" name="taskmanagement_form_edit" template="taskmanagement/form.phtml">
+                <action method="setTitle" translate="title">
+                    <title>Edit Task</title>
+                </action>
+            </block>
+        </reference>
+    </taskmanagement_actions_edit>
+</layout>

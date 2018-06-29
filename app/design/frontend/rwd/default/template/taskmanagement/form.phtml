@@ -1,0 +1,109 @@
+<?php /** @var Maxpronko_TaskManagement_Block_Form $this */ ?>
+<?php $taskInformation = $this->getTaskInformation(); ?>
+<div class="page-title">
+    <h1><?php echo $this->getTitle(); ?></h1>
+</div>
+
+<form action="<?php echo $this->getSaveUrl() ?>" method="post" id="form-validate" class="scaffold-form"
+      enctype="multipart/form-data">
+    <div class="fieldset">
+        <?php echo $this->getBlockHtml('formkey') ?>
+        <h2 class="legend"><?php echo $this->__('Task Information') ?></h2>
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <ul class="form-list">
+
+            <li class="fields">
+                <div class="field task-name">
+                    <label for="taskname" class="required"><em>*</em><?php echo $this->__('Task Name') ?></label>
+                    <div class="input-box">
+                        <input type="text" id="taskname" name="name" title="Task Name" maxlength="255"
+                               class="input-text required-entry"
+                               value="<?php echo ($taskInformation) ? $taskInformation['name'] : '' ?>">
+                    </div>
+                </div>
+            </li>
+            <li class="fields">
+                <div class="field task-description">
+                    <label for="task-description" class="required"><em>*</em><?php echo $this->__('Task Description') ?>
+                    </label>
+                    <div class="input-box">
+                        <input type="text" id="task-description" name="description" title="Task Description"
+                               maxlength="255" class="input-text required-entry"
+                               value="<?php echo ($taskInformation) ? $taskInformation['description'] : '' ?>">
+                    </div>
+                </div>
+            </li>
+
+            <li class="fields">
+                <div class="field task-assigned-to">
+                    <label for="task-assigned-to" class="required"><em>*</em><?php echo $this->__('Assigned Person') ?>
+                    </label>
+                    <div class="input-box">
+                        <input type="text" id="task-assigned-to" name="assigned_to" title="Assigned Person"
+                               maxlength="255" class="input-text required-entry"
+                               value="<?php echo ($taskInformation) ? $taskInformation['assigned_to'] : '' ?>">
+                    </div>
+                </div>
+            </li>
+
+            <li class="fields">
+                <div class="field task-status">
+                    <label for="task-status" class="required"><em>*</em><?php echo $this->__('Status') ?></label>
+                    <div class="input-box">
+                        <select id="task-status" name="status">
+                            <option value=""><?php echo $this->__('Please Select'); ?></option>
+                            <option value="TODO" <?php echo ($taskInformation && $taskInformation['status'] == 'TODO') ? 'selected' : '' ?>><?php echo $this->__('TODO'); ?></option>
+                            <option value="In Progress" <?php echo ($taskInformation && $taskInformation['status'] == 'In Progress') ? 'selected' : '' ?> ><?php echo $this->__('In Progress'); ?></option>
+                            <option value="Done" <?php echo ($taskInformation && $taskInformation['status'] == 'Done') ? 'selected' : '' ?> ><?php echo $this->__('Done'); ?></option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+
+            <li class="fields">
+                <div class="field task-start-time">
+                    <label for="task-start-time" class="required"><em>*</em><?php echo $this->__('Start Time') ?>
+                    </label>
+                    <div class="input-box">
+                        <input type="text" id="task-start-time" name="start_time" title="Start Time" maxlength="255"
+                               class="input-text required-entry validate-date validate-date-range date-range-task_date_range-from"
+                               value="<?php echo ($taskInformation) ? $taskInformation['start_time'] : '' ?>" readonly>
+                    </div>
+                </div>
+            </li>
+
+            <li class="fields">
+                <div class="field task-endend-time">
+                    <label for="task-end-time" class="required"><em>*</em><?php echo $this->__('End Time') ?></label>
+                    <div class="input-box">
+                        <input type="text" id="task-end-time" name="end_time" title="End Time" maxlength="255"
+                               class="input-text required-entry validate-date validate-date-range date-range-task_date_range-to"
+                               value="<?php echo ($taskInformation) ? $taskInformation['end_time'] : '' ?>" readonly>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+    <div class="buttons-set">
+        <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>">
+                <small>&laquo;</small><?php echo $this->__('Back') ?></a></p>
+        <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Save Task')) ?>"
+                class="button"><span><span><?php echo $this->__('Save Task') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+    //]]>
+
+    jQuery('#task-start-time').datetimepicker({
+        value: jQuery('#task-start-time').val(),
+        format: 'Y-m-d H:i'
+    });
+    jQuery('#task-end-time').datetimepicker({
+        value: jQuery('#task-end-time').val(),
+        format: 'Y-m-d H:i'
+    });
+
+</script>

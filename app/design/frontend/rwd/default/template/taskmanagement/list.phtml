@@ -1,0 +1,58 @@
+<?php /** @var Maxpronko_TaskManagement_Block_List $this */ ?>
+<h1>
+    <?php echo $this->getListTitle(); ?>
+</h1>
+<?php $tasksList = $this->getTasksCollection(); ?>
+<?php if (sizeof($tasksList) == 0): ?>
+    <div class="no-tasks-message">
+        <?php echo $this->__('There are no tasks yet!') ?>
+    </div>
+<?php else: ?>
+    <div class="tasks-list-container">
+        <table class="data-table linearize-table-large" id="tasks-list">
+            <col width="10%"/>
+            <col width="10%"/>
+            <col width="10%"/>
+            <col width="10%"/>
+            <col width="20%"/>
+            <col width="20%"/>
+            <col/>
+
+            <thead>
+            <tr>
+                <th><?php echo $this->__('Task Name') ?></th>
+                <th><?php echo $this->__('Task Description') ?></th>
+                <th><?php echo $this->__('Assigned Person') ?></th>
+                <th><?php echo $this->__('Status') ?></th>
+                <th><?php echo $this->__('Start Time') ?></th>
+                <th><?php echo $this->__('End Time') ?></th>
+                <th class="a-center"><?php echo $this->__('Actions') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($tasksList as $task): ?>
+                <tr>
+                    <td><?php echo $task['name'] ?></td>
+                    <td><?php echo $task['description'] ?></td>
+                    <td><?php echo $task['assigned_to'] ?></td>
+                    <td><?php echo $task['status'] ?></td>
+                    <td><?php echo $task['start_time'] ?></td>
+                    <td><?php echo $task['end_time'] ?></td>
+                    <td class="a-center">
+                        <button type="button" class="button href-type"
+                                data-url="<?php echo $this->getTaskEditUrl($task['id']) ?>"><?php echo $this->__('Edit') ?> </button>
+                        <button type="button" class="button href-type"
+                                data-url="<?php echo $this->getTaskDeleteUrl($task['id']) ?>"><?php echo $this->__('Delete') ?> </button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+
+    </div>
+<?php endif; ?>
+<div class="buttons-set">
+    <button type="button" class="button href-type"
+            data-url="<?php echo $this->getAddNewTaskUrl() ?>"><?php echo $this->__('Add new task') ?></button>
+</div>
+
