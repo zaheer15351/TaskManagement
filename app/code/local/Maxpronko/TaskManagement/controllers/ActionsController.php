@@ -92,14 +92,18 @@ class Maxpronko_TaskManagement_ActionsController extends Mage_Core_Controller_Fr
                 return;
             }
 
+            $taskModel = Mage::getModel('taskmanagement/tasks');
             if ($id = $this->getRequest()->getParam('id')) {
-                $taskModel = Mage::getModel('taskmanagement/tasks')->load($id)->addData($postData);
-
-            } else {
-                $taskModel = Mage::getModel('taskmanagement/tasks')->setData($postData);
+                $taskModel->load($id);
 
             }
             try {
+                $taskModel->setName($postData['name']);
+                $taskModel->setDescription($postData['description']);
+                $taskModel->setAssignedTo($postData['assigned_to']);
+                $taskModel->setStatus($postData['status']);
+                $taskModel->setStartTime($postData['start_time']);
+                $taskModel->setEndTime($postData['end_time']);
                 $taskModel->save();
                 Mage::getSingleton('core/session')->addSuccess($this->__('Task has been saved!'));
 

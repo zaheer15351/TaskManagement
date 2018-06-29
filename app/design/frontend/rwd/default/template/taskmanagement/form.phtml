@@ -24,11 +24,11 @@
             </li>
             <li class="fields">
                 <div class="field task-description">
-                    <label for="task-description" class="required"><em>*</em><?php echo $this->__('Task Description') ?>
+                    <label for="task-description"><?php echo $this->__('Task Description') ?>
                     </label>
                     <div class="input-box">
                         <input type="text" id="task-description" name="description" title="Task Description"
-                               maxlength="255" class="input-text required-entry"
+                               maxlength="255" class="input-text"
                                value="<?php echo ($taskInformation) ? $taskInformation['description'] : '' ?>">
                     </div>
                 </div>
@@ -73,7 +73,7 @@
             </li>
 
             <li class="fields">
-                <div class="field task-endend-time">
+                <div class="field task-end-time">
                     <label for="task-end-time" class="required"><em>*</em><?php echo $this->__('End Time') ?></label>
                     <div class="input-box">
                         <input type="text" id="task-end-time" name="end_time" title="End Time" maxlength="255"
